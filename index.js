@@ -2,6 +2,7 @@
 
 const s3 = require('./s3')
 const gm = require('gm').subClass({ imageMagick: true })
+const Image = require('./image')
 
 const getObjectBody = s3.getObjectBody
 const putObject = s3.putObject
@@ -17,27 +18,22 @@ exports.handler = (event, context, callback) => {
   }
 
   getObjectBody(params)
-    .then(body => {
-      gm(body).geometry('200').setFormat('jpeg').toBuffer((err, data) => {
-        if (err) {
+    .then(buffer => {
+      return Image(buffer).map({ size: 555, quality: 80 }).toBuffer()
+    })
+    .then(buffer => {
+      const outParams = {
+        Bucket: 'pioluk-event-images-mini',
+        Key: key,
+        Body: buffer
+      }
+
+      return putObject(outParams)
+        .then(() => callback(null, 'Done'))
+        .catch(err => {
           console.error(err)
-          return callback(err)
-        }
-
-        console.log('Processed image:', data != undefined ? 'OK' : 'Not OK')
-
-        const outParams = {
-          Bucket: 'pioluk-event-images-mini',
-          Key: key,
-          Body: data
-        }
-
-        return putObject(outParams)
-          .then(() => callback(null, 'Done'))
-          .catch(err => {
-            console.error(err)
-            callback(err)
-          })
+          callback(err)
+        })
       })
     })
     .catch(err => {
