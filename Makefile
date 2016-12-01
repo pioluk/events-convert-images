@@ -3,9 +3,9 @@
 OUT_FILE=convert-images-lambda.zip
 LAMBDA_NAME=convert-images
 
-all: lambda upload
+all: zip upload
 
-lambda:
+zip:
 	rm -rf build
 	mkdir build
 	cp *.js build/

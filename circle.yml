@@ -1,0 +1,22 @@
+general:
+  branches:
+    only:
+      - master
+machine:
+  pre:
+    - mkdir ~/.yarn_cache
+  node:
+    version: 7.0
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - rm -rf node_modules
+  cache_directories:
+    - ~/.yarn_cache
+  override:
+    - yarn
+deployment:
+  hub:
+    branch: master
+    commands:
+      - make
