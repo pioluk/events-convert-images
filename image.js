@@ -4,24 +4,25 @@ const gm = require('gm').subClass({ imageMagick: true })
 
 class Image {
 
-  constructor(buffer) {
-    this.gm = gm(buffer)
+  constructor (buffer) {
+    this.gm = gm(buffer).setFormat('jpeg')
   }
 
-  map(config) {
+  map (config) {
     this.gm = this.gm.strip().interlace('Plane')
 
     if (config.size) {
-      this.gm = this.gm.resize(...config.size)
+      this.gm = this.gm.resize(config.size)
     }
 
     if (config.quality) {
       this.gm = this.gm.quality(config.quality)
     }
 
+    return this
   }
 
-  toBuffer() {
+  toBuffer () {
     return new Promise((resolve, reject) => {
       this.gm.toBuffer((error, buffer) => {
         if (error) {
