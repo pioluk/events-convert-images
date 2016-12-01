@@ -19,7 +19,7 @@ exports.handler = (event, context, callback) => {
 
   getObjectBody(params)
     .then(buffer => {
-      return Image(buffer).map({ size: 555, quality: 80 }).toBuffer()
+      return new Image(buffer).map({ size: 555, quality: 80 }).toBuffer()
     })
     .then(buffer => {
       const outParams = {

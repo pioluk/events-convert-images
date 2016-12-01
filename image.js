@@ -2,8 +2,6 @@
 
 const gm = require('gm').subClass({ imageMagick: true })
 
-exports.Image = Image
-
 class Image {
 
   constructor(buffer) {
@@ -36,3 +34,5 @@ class Image {
   }
 
 }
+
+module.exports = Image
