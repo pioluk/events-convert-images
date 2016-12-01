@@ -2,9 +2,12 @@
 
 const s3 = require('./s3')
 const Image = require('./image')
+const config = require('./config.json')
 
 const getObjectBody = s3.getObjectBody
 const putObject = s3.putObject
+const outputBucket = config.outputBucket
+const resolutions = config.resolutions
 
 exports.handler = (event, context, callback) => {
   console.log('Received event:', JSON.stringify(event, null, 2))
@@ -18,22 +21,25 @@ exports.handler = (event, context, callback) => {
 
   getObjectBody(params)
     .then(buffer => {
-      return (new Image(buffer)).map({ size: 600, quality: 25 }).toBuffer()
-    })
-    .then(buffer => {
-      const outParams = {
-        Bucket: 'pioluk-event-images-mini',
-        Key: key,
-        Body: buffer
-      }
+      return Promise.all(
+        resolutions.map(opts => {
+          const img = new Image(buffer).map(opts).toBuffer()
+          return img
+            .then(buffer => {
+              const outParams = {
+                Bucket: outputBucket,
+                Key: opts.directory + '/' + key,
+                Body: buffer
+              }
 
-      return putObject(outParams)
-        .then(() => callback(null, 'Done'))
-        .catch(err => {
-          console.error(err)
-          callback(err)
+              return putObject(outParams)
+            })
+            .then(() => callback(null, 'Saved ' + opts.directory + '/' + key +
+                                        ' with options ' + JSON.stringify(opts, null, 2)))
         })
+      )
     })
+    .then(() => callback(null, 'OK'))
     .catch(err => {
       console.error(err)
       callback(err)

@@ -1,0 +1,23 @@
+{
+  "outputBucket": "pioluk-event-images-processed",
+  "resolutions": [
+    {
+      "directory": "small",
+      "size": 200,
+      "quality": 90
+    },
+    {
+      "directory": "medium",
+      "size": 600,
+      "quality": 90
+    },
+    {
+      "directory": "large",
+      "size": 900
+    },
+    {
+      "directory": "xlarge",
+      "quality": 90
+    }
+  ]
+}
