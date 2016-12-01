@@ -13,11 +13,12 @@
     },
     {
       "directory": "large",
-      "size": 900
+      "size": 900,
+      "quality": 90
     },
     {
       "directory": "xlarge",
-      "quality": 90
+      "quality": 80
     }
   ]
 }
