@@ -1,0 +1,16 @@
+{
+  "name": "convert-images",
+  "version": "1.0.0",
+  "author": "Piotr Łukomiak <181423@edu.p.lodz.pl>",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "gm": "^1.23.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}
