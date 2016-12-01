@@ -14,7 +14,7 @@ dependencies:
   cache_directories:
     - ~/.yarn_cache
   override:
-    - yarn
+    - yarn install
 deployment:
   hub:
     branch: master

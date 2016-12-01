@@ -8,7 +8,7 @@ all: zip upload
 zip:
 	rm -rf build
 	mkdir build
-	cp *.js build/
+	cp *.{js,json} build/
 	cp -r node_modules build/
 	cd build && zip -rq $(OUT_FILE) .
 	mv build/$(OUT_FILE) ./
