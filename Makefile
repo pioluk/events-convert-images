@@ -14,7 +14,10 @@ zip:
 	mv build/$(OUT_FILE) ./
 
 upload:
-	aws lambda update-function-code --function-name $(LAMBDA_NAME) --zip-file fileb://$(OUT_FILE)
+	aws lambda update-function-code \
+    --region eu-central-1 \
+    --function-name $(LAMBDA_NAME) \
+    --zip-file fileb://$(OUT_FILE)
 
 clean:
 	rm $(OUT_FILE)
