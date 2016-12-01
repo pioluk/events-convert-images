@@ -34,7 +34,7 @@ exports.handler = (event, context, callback) => {
 
               return putObject(outParams)
             })
-            .then(() => callback(null, 'Saved ' + opts.directory + '/' + key +
+            .then(() => console.log('Saved ' + opts.directory + '/' + key +
                                         ' with options ' + JSON.stringify(opts, null, 2)))
         })
       )
