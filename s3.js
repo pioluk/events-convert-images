@@ -1,10 +1,11 @@
-'use strict';
+'use strict'
 
 const aws = require('aws-sdk')
 const s3 = new aws.S3({ apiVersion: '2006-03-01' })
 
 exports.getObject = getObject
 exports.getObjectBody = getObjectBody
+exports.putObject = putObject
 
 function getObject (params) {
   return new Promise((resolve, reject) => {
