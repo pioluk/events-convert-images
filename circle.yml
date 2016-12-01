@@ -15,6 +15,9 @@ dependencies:
     - ~/.yarn_cache
   override:
     - yarn install
+test:
+  override:
+    - yarn test
 deployment:
   hub:
     branch: master
