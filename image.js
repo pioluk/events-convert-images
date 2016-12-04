@@ -9,7 +9,7 @@ class Image {
   }
 
   map (config) {
-    this.gm = this.gm.strip()
+    this.gm = this.gm.strip().interlace('Plane')
 
     if (config.size) {
       this.gm = this.gm.resize(config.size)
