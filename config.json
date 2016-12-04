@@ -2,6 +2,11 @@
   "outputBucket": "pioluk-event-images-processed",
   "resolutions": [
     {
+      "directory": "nano",
+      "size": "2%",
+      "quality": 90
+    },
+    {
       "directory": "small",
       "size": 200,
       "quality": 90

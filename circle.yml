@@ -3,15 +3,25 @@ general:
     only:
       - master
 machine:
+  environment:
+    YARN_VERSION: 0.18.0
+    PATH: "${PATH}:${HOME}/.yarn/bin"
   pre:
     - mkdir ~/.yarn_cache
   node:
     version: 4.3
 dependencies:
   pre:
-    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - |
+      if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
+        echo "Download and install Yarn."
+        curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
+      else
+        echo "The correct version of Yarn is already installed."
+      fi
     - rm -rf node_modules
   cache_directories:
+    - ~/.yarn
     - ~/.yarn_cache
   override:
     - yarn install
