@@ -23,6 +23,7 @@
     },
     {
       "directory": "xlarge",
+      "size": 1200,
       "quality": 80
     }
   ]
