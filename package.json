@@ -8,10 +8,10 @@
     "test": "mocha"
   },
   "dependencies": {
-    "gm": "^1.23.0"
+    "gm": "1.23.0"
   },
   "devDependencies": {
-    "mocha": "^3.2.0"
+    "mocha": "3.2.0"
   },
   "eslintConfig": {
     "extends": "standard"
